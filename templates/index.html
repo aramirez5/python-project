@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}" />
+    <title>Lista de tareas</title>
+</head>
+
+<body>
+    <h1>Lista de tareas</h1>
+    <ul>
+        {% for task in tasks %}
+        <li>{{ task }}</li>
+        {% endfor %}
+    </ul>
+
+    <form action="/add" method="POST">
+        <input type="text" name="task" placeholder="Nueva tarea" required>
+        <button type="submit">Agregar tarea</button>
+    </form>
+
+    <!-- Agregar este bloque para mostrar los mensajes de error -->
+    {% for error_message in error_messages %}
+    <div class="error">{{ error_message }}</div>
+    {% endfor %}
+
+    <!-- Agregar este bloque para mostrar el mensaje de éxito -->
+    {% if success_message %}
+    <div class="success">{{ success_message }}</div>
+    {% endif %}
+
+    <form action="/delete" method="POST">
+        <input type="text" name="task" placeholder="Tarea a eliminar" required />
+        <button type="submit">Eliminar tarea</button>
+    </form>
+    
+    <!-- Agregar este bloque para mostrar el mensaje de error -->
+    {% if error_message %}
+    <div class="error">{{ error_message }}</div>
+    {% endif %}
+</body>
+
+</html>
