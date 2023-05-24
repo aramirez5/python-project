@@ -26,7 +26,7 @@ def add():
         tasks.append(task)
         success_message = f'Se agregó la tarea "{task}" correctamente.'
         error_messages.clear()
-    return render_template('index.html', tasks=tasks, error_messages=error_messages, success_message=success_message)
+    return render_template('index.html', tasks=tasks, error_messages=error_messages, success_message=success_message if 'success_message' in locals() else '')
 
 @app.route('/delete', methods=['POST'])
 def delete():
