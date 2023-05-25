@@ -1,5 +1,11 @@
 # python-project
 
-python -m unittest tests.todo_test
+TEST
+python -m pytest
 
-python tests/todo_test.py
+RUN
+python todo.py
+
+INSTALL
+pip install flask
+pip install pytest
