@@ -18,7 +18,7 @@ def test_add_existing_task():
     response = client.post('/add', data={'task': 'Task 1'})
     assert response.status_code == 200
     soup = BeautifulSoup(response.data, 'html.parser')
-    error_message = soup.find('div', {'class': 'error'}).text.strip()
+    error_message = soup.find('div', {'class': 'alert alert-danger'}).text.strip()
     assert error_message == 'La tarea "Task 1" ya existe.'
 
 def test_delete_task():
@@ -32,5 +32,5 @@ def test_delete_nonexistent_task():
     response = client.post('/delete', data={'task': 'Task 1'})
     assert response.status_code == 200
     soup = BeautifulSoup(response.data, 'html.parser')
-    error_message = soup.find('div', {'class': 'error'}).text.strip()
+    error_message = soup.find('div', {'class': 'alert alert-danger'}).text.strip()
     assert error_message == 'La tarea "Task 1" no existe.'

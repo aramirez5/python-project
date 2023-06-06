@@ -2,42 +2,48 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}" />
-    <title>Lista de tareas</title>
+  <title>Lista de tareas</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 
 <body>
+  <div class="container">
     <h1>Lista de tareas</h1>
-    <ul>
-        {% for task in tasks %}
-        <li>{{ task }}</li>
-        {% endfor %}
+    <ul class="list-group">
+      {% for task in tasks %}
+      <li class="list-group-item">{{ task }}</li>
+      {% endfor %}
     </ul>
 
     <form action="/add" method="POST">
-        <input type="text" name="task" placeholder="Nueva tarea" required>
-        <button type="submit">Agregar tarea</button>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" name="task" placeholder="Nueva tarea" required />
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit">Agregar tarea</button>
+        </div>
+      </div>
     </form>
-
-    <!-- Agregar este bloque para mostrar los mensajes de error -->
-    {% for error_message in error_messages %}
-    <div class="error">{{ error_message }}</div>
-    {% endfor %}
-
-    <!-- Agregar este bloque para mostrar el mensaje de éxito -->
-    {% if success_message %}
-    <div class="success">{{ success_message }}</div>
-    {% endif %}
 
     <form action="/delete" method="POST">
-        <input type="text" name="task" placeholder="Tarea a eliminar" required />
-        <button type="submit">Eliminar tarea</button>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" name="task" placeholder="Tarea a eliminar" required />
+        <div class="input-group-append">
+          <button class="btn btn-danger" type="submit">Eliminar tarea</button>
+        </div>
+      </div>
     </form>
-    
-    <!-- Agregar este bloque para mostrar el mensaje de error -->
-    {% if error_message %}
-    <div class="error">{{ error_message }}</div>
+
+    {% if error_messages %}
+    <div class="alert alert-danger" role="alert">
+      {% for error in error_messages %} {{ error }} {% endfor %}
+    </div>
+    {% endif %} {% if success_message %}
+    <div class="alert alert-success" role="alert">{{ success_message }}</div>
     {% endif %}
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
