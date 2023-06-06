@@ -44,4 +44,6 @@ jobs:
       if: always()
       with:
         name: pytest report
-        path: report.html
+        path: |
+          report.html
+          assets/style.css
